@@ -74,7 +74,6 @@ export default function ContactForm() {
           <span className="mx-4 text-orange-500 font-serif italic font-normal">
             Brickchain
           </span>{" "}
-          TEAM.
         </h1>
         <p className="text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
           Have questions about blockchain integration, security, or token development? Get in touch with our experts and take your project to the next level.
