@@ -46,10 +46,17 @@ function ImageCard({ image, title, description }) {
       whileHover={{ scale: 1.05 }}
       className="relative overflow-hidden rounded-lg group aspect-[4/5] h-full shadow-lg"
     >
-      <motion.div className="absolute inset-0 w-full h-full transition-all duration-300 group-hover:blur-sm">
+      {/* Image Container */}
+      <motion.div className="absolute inset-0 w-full h-full transition-all duration-300 group-hover:blur-none">
         <img src={image || "/placeholder.svg"} alt={title} className="object-cover w-full h-full" />
       </motion.div>
-      <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-t from-black/70 to-transparent">
+
+      {/* Overlay (Visible by default on mobile, fades in on hover for desktop) */}
+      <div
+        className="absolute inset-0 flex flex-col justify-end p-6 
+          bg-gradient-to-t from-black/80 to-transparent 
+          opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300"
+      >
         <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
         <p className="text-sm text-white/90">{description}</p>
       </div>
