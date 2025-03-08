@@ -76,7 +76,7 @@ export default function ContactForm() {
           </span>{" "}
           TEAM.
         </h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <p className="text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
           Have questions about blockchain integration, security, or token development? Get in touch with our experts and take your project to the next level.
         </p>
       </motion.div>
