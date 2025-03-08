@@ -4,13 +4,26 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Menu, MoveUpRight, ToyBrick, X } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
+import { motion } from "framer-motion";
 
 const menuLinks = [
 	{ path: "#", label: "Home" },
 	{ path: "#features", label: "Features" },
 	{ path: "#contact", label: "Contact" },
 ];
+const fadeIn = {
+	hidden: { opacity: 0, y: 50 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
 
+const scaleUp = {
+	hidden: { opacity: 0, scale: 0.9 },
+	visible: {
+		opacity: 1,
+		scale: 1,
+		transition: { duration: 1, ease: "easeOut" },
+	},
+};
 const Navbar = () => {
 	const container = useRef();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,7 +64,7 @@ const Navbar = () => {
 	}, [isMenuOpen]);
 
 	return (
-		<>
+		<motion.div initial="hidden" animate="visible">
 			<div
 				className="menu-container bg-white dark:bg-neutral-900"
 				ref={container}
@@ -147,7 +160,7 @@ const Navbar = () => {
 					</div>
 				</div>
 			</div>
-		</>
+		</motion.div>
 	);
 };
 

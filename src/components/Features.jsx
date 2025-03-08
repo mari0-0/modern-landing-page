@@ -1,3 +1,6 @@
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+
 const cards = [
   {
     image: "/f2.png",
@@ -31,45 +34,62 @@ const cards = [
   },
 ];
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
 
 function ImageCard({ image, title, description }) {
-	return (
-		<div className="relative overflow-hidden rounded-lg group aspect-[4/5] h-full">
-			<div className="absolute inset-0 w-full h-full transition-all duration-300 group-hover:blur-sm">
-				<img
-					src={image || "/placeholder.svg"}
-					alt={title}
-					fill
-					className="object-cover"
-				/>
-			</div>
-			<div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-t from-black/70 to-transparent">
-				<h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-				<p className="text-sm text-white/90">{description}</p>
-			</div>
-		</div>
-	);
+  return (
+    <motion.div
+      variants={fadeInUp}
+      whileHover={{ scale: 1.05 }}
+      className="relative overflow-hidden rounded-lg group aspect-[4/5] h-full shadow-lg"
+    >
+      <motion.div className="absolute inset-0 w-full h-full transition-all duration-300 group-hover:blur-sm">
+        <img src={image || "/placeholder.svg"} alt={title} className="object-cover w-full h-full" />
+      </motion.div>
+      <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-t from-black/70 to-transparent">
+        <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+        <p className="text-sm text-white/90">{description}</p>
+      </div>
+    </motion.div>
+  );
 }
 
 export default function Features() {
-	return (
-		<div className="dark:bg-neutral-900 p-8 md:p-16 container mx-auto px-4 py-12" id="features">
-			<h1 className="mb-12 text-center text-5xl md:text-7xl font-bold text-neutral-900 dark:text-white leading-tight">
-				OUR{" "}
-				<span className="text-orange-500 font-serif italic font-normal">
-					spotlight
-				</span>
-			</h1>
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-				{cards.map((card, index) => (
-					<ImageCard
-						key={index}
-						image={card.image}
-						title={card.title}
-						description={card.description}
-					/>
-				))}
-			</div>
-		</div>
-	);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      className="dark:bg-neutral-900 p-8 md:p-16 container mx-auto px-4 py-12"
+      id="features"
+    >
+      <motion.h1
+        variants={fadeInUp}
+        className="mb-12 text-center text-5xl md:text-7xl font-bold text-neutral-900 dark:text-white leading-tight"
+      >
+        OUR{" "}
+        <span className="text-orange-500 font-serif italic font-normal">
+          spotlight
+        </span>
+      </motion.h1>
+
+      <motion.div
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+        }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        {cards.map((card, index) => (
+          <ImageCard key={index} image={card.image} title={card.title} description={card.description} />
+        ))}
+      </motion.div>
+    </motion.div>
+  );
 }
