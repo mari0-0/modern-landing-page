@@ -13,8 +13,8 @@ export default function Footer() {
 					<div className="w-[80%] h-full flex flex-col md:flex-row ">
 						<div className="w-full h-full px-4 pt-12 pb-4 flex flex-row md:flex-col  justify-between">
 							<div className="w-full flex gap-2">
-								<ToyBrick className="w-8 h-8 md:w-12 md:h-12 rounded-[4px]" />
-								<h1 className="font-neue font-semibold text-2xl md:text-5xl">
+								<h1 className="w-fit h-fit font-neue font-semibold text-xl md:text-5xl flex items-center gap-1">
+									<ToyBrick className="w-6 h-6 md:w-12 md:h-12 rounded-[4px]" />
 									BrickChain
 								</h1>
 							</div>
